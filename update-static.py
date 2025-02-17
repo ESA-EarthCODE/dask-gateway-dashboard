@@ -6,8 +6,8 @@ pure_css_version = "3.0.0"
 
 base_url = f"https://cdn.jsdelivr.net/npm/purecss@{pure_css_version}"
 
-static = Path(__file__).parent.resolve()
-pure_css = static / "vendor" / "pure-css"
+static = Path(__file__).parent.resolve() / "static"
+pure_css = static / "pure-css"
 
 pure_css.mkdir(parents=True, exist_ok=True)
 

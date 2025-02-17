@@ -34,6 +34,9 @@ jobs:
         run: |
           pip install ".[test]"
           pip list
+      - name: Fetch static resources
+        run: |
+          python3 update-static.py
       - name: Install browser for playwright
         run: |
           python -m playwright install --with-deps firefox

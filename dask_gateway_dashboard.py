@@ -11,11 +11,14 @@ from dask_gateway import Gateway
 from dask_gateway.client import ClusterReport, ClusterStatus, GatewayCluster
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi.staticfiles import StaticFiles
 
 app_dir = Path(__file__).parent.resolve()
 index_html = app_dir / "index.html"
 log = logging.getLogger("uvicorn.error")
 app = FastAPI()
+
+app.mount("/static", StaticFiles(directory=app_dir / "static"), name="static")
 
 
 class ClusterModel(TypedDict):

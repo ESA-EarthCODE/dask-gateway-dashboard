@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "dask-gateway-dashboard"
-version = "0.1.1"
+version = "0.1.2"
 dynamic = ["readme", "dependencies"]
 description = "Serve a page that lists dask gateway clusters"
 authors = [{ name = "Min RK", email = "benjaminrk@gmail.com" }]
@@ -79,7 +79,7 @@ select = [
 github_url = "https://github.com/minrk/dask-gateway-dashboard"
 
 [tool.tbump.version]
-current = "0.1.1"
+current = "0.1.2"
 
 regex = '''
   (?P<major>\d+)

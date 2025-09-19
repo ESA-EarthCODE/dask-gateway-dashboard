@@ -1,2 +1,5 @@
 dask-gateway
+dask-gateway-server
 fastapi[standard]
+jupyterhub
+itsdangerous

@@ -14,6 +14,7 @@ pytestmark = pytest.mark.asyncio(loop_scope="session")
 host: str = "127.0.0.1"
 port: int = 9999
 base_url: str = f"http://{host}:{port}"
+workspace_url: str = "https://workspace.test.hub-otc.eox.at/"
 
 
 @pytest.fixture(autouse=True)
@@ -33,9 +34,10 @@ async def server(gateway):
         await server.shutdown()
         cancel_handle.cancel()
 
-
+# TODO: adapt these tests to the changes in dask_gateway_dashboard.py
 @pytest.mark.browser_context_args(timezone_id="Europe/Oslo", locale="nb-NO")
 async def test_table(gateway, page: Page):
+    await page.add_init_script(f"window.eoxWorkspaceUrl = '{workspace_url}'")
     await page.goto(base_url)
     table = page.get_by_role("table")
     table_body = table.locator("#clusters-body")
@@ -61,9 +63,10 @@ async def test_table(gateway, page: Page):
     # localized time
     assert started_text.startswith(f"{dt.day}.{dt.month}.{dt.year}")
 
-
+# TODO: adapt these tests to the changes in dask_gateway_dashboard.py
 async def test_stop(gateway, page: Page):
     await gateway.new_cluster()
+    await page.add_init_script(f"window.eoxWorkspaceUrl = '{workspace_url}'")
     await page.goto(base_url)
     table = page.get_by_role("table")
     table_body = table.locator("#clusters-body")

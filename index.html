@@ -50,6 +50,13 @@
       </div>
     </div>
     <script>
+      const WORKSPACE_HEADER_NAME = "X-Workspace-Url";
+
+      function workspaceHeaders() {
+        const workspaceUrl = window.eoxWorkspaceUrl || window.location.href; // e.g. expecting "https://workspace.dask-gateway.hub-otc.eox.at/dask-gateway-dashboard"
+        return { [WORKSPACE_HEADER_NAME]: workspaceUrl };
+      }
+
       async function stopCluster(clusterName) {
         var baseURL = document.location.href;
         // trailing slash
@@ -58,6 +65,7 @@
         }
         r = await fetch(baseURL + `clusters/${clusterName}`, {
           method: "DELETE",
+          headers: workspaceHeaders(),
         });
         document.location.reload();
       }
@@ -122,7 +130,9 @@
         if (baseURL[baseURL.length - 1] !== "/") {
           baseURL += "/";
         }
-        r = await fetch(baseURL + "clusters");
+        r = await fetch(baseURL + "clusters", {
+          headers: workspaceHeaders(),
+        });
         clusters = await r.json();
         window.clusters = clusters;
         const clusterBody = document.getElementById("clusters-body");

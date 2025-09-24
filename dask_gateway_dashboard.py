@@ -33,7 +33,7 @@ if LOG_MODE == "dev":
 else:
     uvicorn_access_logger.disabled = True
 
-app = FastAPI()
+app = FastAPI(root_path=os.environ.get("ROOT_PATH", ""))
 
 app.add_middleware(
     SessionMiddleware, secret_key=os.environ.get("SESSION_ENCRYPT_TOKEN", secrets.token_hex(32)).strip()

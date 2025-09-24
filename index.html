@@ -53,7 +53,7 @@
       const WORKSPACE_HEADER_NAME = "X-Workspace-Url";
 
       function workspaceHeaders() {
-        const workspaceUrl = window.eoxWorkspaceUrl || window.location.href; // e.g. expecting "https://workspace.dask-gateway.hub-otc.eox.at/dask-gateway-dashboard"
+        const workspaceUrl = window.eoxWorkspaceUrl || window.parent.location.href; // e.g. expecting "https://workspace.dask-gateway.hub-otc.eox.at/dask-gateway-dashboard"
         return { [WORKSPACE_HEADER_NAME]: workspaceUrl };
       }
 

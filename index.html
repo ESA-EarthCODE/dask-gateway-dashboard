@@ -137,9 +137,11 @@
         window.clusters = clusters;
         const clusterBody = document.getElementById("clusters-body");
         clusterBody.innerHTML = "";
-        for (cluster of clusters) {
-          var tr = clusterRow(cluster);
-          clusterBody.appendChild(tr);
+        if (Array.isArray(clusters) && clusters.length > 0) {
+          for (cluster of clusters) {
+            var tr = clusterRow(cluster);
+            clusterBody.appendChild(tr);
+          }
         }
       }
 

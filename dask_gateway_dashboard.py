@@ -120,9 +120,12 @@ def make_cluster_model(cluster: GatewayCluster | ClusterReport) -> ClusterModel:
         "started": started,
     }
 
+NAMESPACE_HOST_PATTERN = os.environ.get(
+    "NAMESPACE_HOST_PATTERN",
+    r"^(?:workspace\.([a-z0-9-]+)\.)?hub-otc(?:-sc)?\.eox\.at$"
+)
 
-_NAMESPACE_HOST_PATTERN = re.compile(r"^workspace\.([a-z0-9-]+)\.hub-otc\.eox\.at$")
-
+_NAMESPACE_HOST_PATTERN = re.compile(NAMESPACE_HOST_PATTERN)
 
 def _extract_namespace_from_url(workspace_url: str) -> str:
     parsed = urlparse(workspace_url)
